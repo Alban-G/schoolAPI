@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const e = require('express');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -15,7 +14,13 @@ app.use(cors());
 // static files middleware
 app.use("/uploads", express.static("uploads"));
 
-
+// Import routes
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
+const classroomRoutes = require('./routes/class');
+app.use('/api/classroom', classroomRoutes);
+const teacherRoutes = require('./routes/teacher');
+app.use('/api/teacher', teacherRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
