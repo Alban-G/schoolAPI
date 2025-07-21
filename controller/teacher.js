@@ -1,4 +1,4 @@
-const { Teacher, User, Classroom } = require('../models/model');
+const { Teacher, User, Classroom , Assignment } = require('../models/model');
 const bcrypt = require('bcrypt');
 
 // add teacher
@@ -185,5 +185,19 @@ exports.getMyClasses = async (req, res) => {
     } catch (error) {
         console.error('Error fetching classes for teacher:', error);
         res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    }
+};
+// teachers get their assignments
+exports.getMyAssignment = async (req, res) => {
+    try {
+        // logged-In user
+        const userId = req.user.userId
+        const user = await User.findById(userId).populate('teacher');
+
+        const assignments = await Assignment.find({postedBy: user.teacher._id})
+        .populate ('classroom', 'name grade classyear')
+        res.status(200).json(assignments)
+    } catch {
+        res.status(500).json({ message: 'internal server error', error: error.message })
     }
 };

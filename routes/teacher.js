@@ -6,8 +6,9 @@ const { authenticate, authorizeRoles } = require('../middleware/auth');
 // Add a new teacher
 router.post('/', authenticate, authorizeRoles("admin"), teacherController.addTeacher);
 //get
-router.get('/', authenticate, teacherController.getAllTeachers);
+router.get('/assignment', authenticate, teacherController.getMyAssignment);
 router.get('/classes', authenticate, teacherController.getMyClasses);
+router.get('/', authenticate, teacherController.getAllTeachers);
 router.get('/:id', authenticate, teacherController.getTeacherById);
 // update
 router.put('/:id', authenticate, authorizeRoles("admin", "teacher"), teacherController.updateTeacher);

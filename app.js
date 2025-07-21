@@ -21,6 +21,10 @@ const classroomRoutes = require('./routes/class');
 app.use('/api/classroom', classroomRoutes);
 const teacherRoutes = require('./routes/teacher');
 app.use('/api/teacher', teacherRoutes);
+const assignmentRoutes = require('./routes/assignment');
+app.use('/api/assignment', assignmentRoutes);
+const parentRoutes = require('./routes/parent');
+app.use('/api/parent', parentRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
