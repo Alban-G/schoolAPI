@@ -9,7 +9,7 @@ router.post('/', authenticate, authorizeRoles("admin"), parentController.addPare
 // get
 router.get('/', authenticate, authorizeRoles("admin"), parentController.getAllParents);
 // put
-router.put('/:id', authenticate, authorizeRoles("admin", "parent"), parentController.updateParent);
+router.put('/:id', authenticate, authorizeRoles("admin"), parentController.updateParent);
 router.put('/self', authenticate, authorizeRoles("parent"), parentController.updateParent);
 
 module.exports = router;
