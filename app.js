@@ -30,6 +30,12 @@ app.use('/api/student', studentRoles);
 // Admin Dashboard
 const adminRoutes = require('./routes/admin');
 app.use('/api/admin', adminRoutes);
+// teacher Dashboard
+const teachRoutes = require('./routes/teachDash');
+app.use('/api/teachdash', teachRoutes);
+// parent Dashboard
+const wazaeRoutes = require('./routes/parentDash');
+app.use('/api/parentdash/', wazaeRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)

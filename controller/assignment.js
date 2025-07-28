@@ -1,4 +1,3 @@
-const { application } = require('express');
 const { Assignment, User, Classroom } = require('../models/model');
 
 // get all assignments (Admin view)
