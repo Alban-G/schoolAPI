@@ -9,12 +9,12 @@ exports.registerAdmin = async (req, res) => {
 
         // Validate admin secret key
         if (secretKey !== process.env.secretKey) {
-            return res.status(403).json({ message: 'Unauthorised Account Creation' });
+            return res.json({ message: 'Unauthorised Account Creation' });
         }
         // Check if the admin account already exists
         const existingAdmin = await User.findOne({ email });
         if (existingAdmin) {
-            return res.status(400).json({ message: 'Admin Account Already Exists' });
+            return res.json({ message: 'Admin Account Already Exists' });
         }
         // harshing password
         const hashedPassword = await bcrypt.hash(password,10);
@@ -41,12 +41,12 @@ exports.login = async (req, res) => {
         // Check if the user exists
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).json({ message: 'User Not Found' });
+            return res.json({ message: 'User Not Found' });
         }
         // Check if the password is correct
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            return res.status(401).json({ message: 'Invalid Password' });
+            return res.json({ message: 'Invalid Password' });
         }
         // Generate JWT token
         const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
