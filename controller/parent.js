@@ -47,6 +47,19 @@ exports.getAllParents = async (req, res) => {
     }
 };
 
+// get one parent
+exports.getParentById = async (req, res) => {
+    try {
+        const parent = await Parent.findOne({nationalId: req.params.id});
+        if (!parent) {
+            return res.status(404).json({ message: 'Parent Not Found' })
+        }
+        res.status(200).json(parent)
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching parents', error: error.message });
+    }
+};
+
 // update parent
 // // update teacher
 exports.updateParent = async (req, res) => {
